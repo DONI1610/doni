@@ -1,131 +1,111 @@
-html
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Thực Bio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bio Link</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      text-align: center;
-      color: white;
-      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
     }
+
     @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .card {
-      margin-top: 60px;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 30px;
-      border-radius: 20px;
-      display: inline-block;
-    }
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid white;
-    }
-    .links {
-      margin-top: 20px;
-    }
-    .links a {
-      display: block;
-      margin: 10px auto;
-      padding: 10px;
-      width: 200px;
-      background: white;
-      color: black;
-      border-radius: 25px;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    .links a:hover {
-      background: #23a6d5;
-      color: white;
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
 
-    /* Player */
-    .player {
-      margin-top: 30px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 15px;
-      border-radius: 15px;
+    .card {
+      background: rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      width: 300px;
     }
-    button {
-      margin: 5px;
-      padding: 8px 12px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: #23a6d5;
+
+    .card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .links a {
+      display: block;
+      margin: 8px 0;
+      padding: 10px;
+      background: #4a90e2;
       color: white;
+      text-decoration: none;
+      border-radius: 8px;
       transition: 0.3s;
     }
-    button:hover {
-      background: #1a7fa3;
+
+    .links a:hover {
+      background: #357ABD;
     }
-    #progress {
-      width: 80%;
-      margin: 10px auto;
+
+    .player {
+      margin-top: 15px;
     }
-    #volume {
-      width: 80%;
-      margin-top: 5px;
+
+    .player button {
+      margin: 5px;
+      padding: 10px;
+      border: none;
+      border-radius: 50%;
+      background: #4a90e2;
+      color: white;
+      cursor: pointer;
+    }
+
+    .player input[type="range"] {
+      width: 100%;
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <img src="https://i.imgur.com/8Km9tLL.png" alt="Avatar" class="avatar">
+    <img src="https://i.pravatar.cc/300" alt="Avatar">
     <h2>Thực DZ</h2>
-    <p>Chào mừng bạn đến với bio link của mình ✨</p>
+    <p>Web bio của tui nè 🚀</p>
     <div class="links">
-      <a href="https://facebook.com/" target="_blank">Facebook</a>
-      <a href="https://instagram.com/" target="_blank">Instagram</a>
-      <a href="https://github.com/" target="_blank">GitHub</a>
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
     </div>
 
-    <!-- Music Player -->
     <div class="player">
-      <p id="trackName">🎶 Chưa phát nhạc</p>
-      <audio id="audio"></audio>
-      <input type="range" id="progress" value="0" step="1">
-      <br>
-      <button onclick="prevSong()">⏮ Trước</button>
-      <button onclick="togglePlay()">▶️ / ⏸</button>
-      <button onclick="nextSong()">⏭ Tiếp</button>
-      <br>
-      <label>Âm lượng: </label>
+      <audio id="audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+      <div>
+        <button onclick="prev()">⏮</button>
+        <button onclick="togglePlay()">▶️/⏸</button>
+        <button onclick="next()">⏭</button>
+      </div>
       <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
     </div>
   </div>
 
   <script>
-    const playlist = [
-      { name: "Khi mà (demo, cần file riêng)", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-      { name: "Chill Lofi Beat 1", src: "https://files.freemusicarchive.org/storage-freemusicarchive-org/tracks/n0D2PzQ2j4S7huhE5MPRZk5gqsh5Ugfo9Yy6MfK7.mp3" },
-      { name: "Chill Lofi Beat 2", src: "https://files.freemusicarchive.org/storage-freemusicarchive-org/tracks/2E4sR6Z9UoCwcbNfR7C6UhYcnV2UfwhdGQHfL6e.mp3" },
-      { name: "Chill Lofi Beat 3", src: "https://files.freemusicarchive.org/storage-freemusicarchive-org/tracks/F7b3nKQ6U2AvnSmqQbU8MpWcGbJjPQytR8tF9sE.mp3" }
-    ];
-
-    let currentTrack = 0;
     const audio = document.getElementById("audio");
-    const trackName = document.getElementById("trackName");
-    const progress = document.getElementById("progress");
     const volume = document.getElementById("volume");
 
-    function loadTrack(index) {
-      audio.src = playlist[index].src;
-      trackName.innerText = "🎶 " + playlist[index].name;
-      audio.load();
-    }
+    const playlist = [
+      "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+      "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+    ];
+    let current = 0;
 
     function togglePlay() {
       if (audio.paused) {
@@ -135,36 +115,21 @@ html
       }
     }
 
-    function nextSong() {
-      currentTrack = (currentTrack + 1) % playlist.length;
-      loadTrack(currentTrack);
+    function next() {
+      current = (current + 1) % playlist.length;
+      audio.src = playlist[current];
       audio.play();
     }
 
-    function prevSong() {
-      currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-      loadTrack(currentTrack);
+    function prev() {
+      current = (current - 1 + playlist.length) % playlist.length;
+      audio.src = playlist[current];
       audio.play();
     }
-
-    audio.addEventListener("timeupdate", () => {
-      progress.max = audio.duration;
-      progress.value = audio.currentTime;
-    });
-
-    progress.addEventListener("input", () => {
-      audio.currentTime = progress.value;
-    });
 
     volume.addEventListener("input", () => {
       audio.volume = volume.value;
     });
-
-    audio.addEventListener("ended", nextSong);
-
-    // Load track đầu tiên
-    loadTrack(currentTrack);
   </script>
 </body>
 </html>
-
