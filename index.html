@@ -1,0 +1,98 @@
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Link Bio - thucdz</title>
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4CAF50, #2E8B57);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      color: white;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .container {
+      background: rgba(0,0,0,0.6);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      width: 350px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      animation: slideUp 1s ease-out;
+    }
+    @keyframes slideUp {
+      from {transform: translateY(40px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 3px solid white;
+      animation: pulse 3s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% {transform: scale(1);}
+      50% {transform: scale(1.05);}
+    }
+    h1 {
+      margin: 10px 0;
+    }
+    p {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+    .link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: white;
+      color: #333;
+      text-decoration: none;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: transform 0.2s, background 0.3s;
+    }
+    .link:hover {
+      background: #ddd;
+      transform: scale(1.05);
+    }
+    .link i {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Avatar -->
+    <img src="https://i.imgur.com/0y0y0y0.png" alt="avatar" class="avatar">
+
+    <!-- Tên -->
+    <h1>thucdz</h1>
+    <p>👋 Xin chào!</p>
+
+    <!-- Các link -->
+    <a href="https://facebook.com/" target="_blank" class="link"><i class="fab fa-facebook"></i> Facebook</a>
+    <a href="https://youtube.com/" target="_blank" class="link"><i class="fab fa-youtube"></i> YouTube</a>
+    <a href="https://tiktok.com/" target="_blank" class="link"><i class="fab fa-tiktok"></i> TikTok</a>
+    <a href="https://github.com/" target="_blank" class="link"><i class="fab fa-github"></i> GitHub</a>
+  </div>
+</body>
+</html>
+```
