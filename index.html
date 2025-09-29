@@ -1,90 +1,388 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bio + Snake Game</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      color: white;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(-45deg, #2c3e50, #4ca1af, #bdc3c7, #2c3e50);
+    :root{
+      --glass-bg: rgba(0,0,0,0.5);
+      --accent: #23a6d5;
+      --soft: rgba(255,255,255,0.12);
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:#111;overflow:hidden}
+    /* Background gradient + subtle animation */
+    body{
+      display:flex;align-items:center;justify-content:center;
+      background: linear-gradient(135deg,#0f2336 0%, #102a3c 40%, #334e5f 100%);
       background-size: 400% 400%;
-      animation: gradientBG 20s ease infinite;
-      overflow: hidden;
+      animation: bg 18s ease infinite;
     }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    @keyframes bg{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-    .card {
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      width: 300px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-      backdrop-filter: blur(10px);
-      animation: fadeIn 1.5s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* Rain canvas sits behind */
+    #rainCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid white;
-      object-fit: cover;
-      margin-bottom: 15px;
-      transition: transform 0.3s ease;
+    /* Card */
+    .card{
+      position:relative;z-index:2;
+      width:820px;max-width:95%;
+      background:var(--glass-bg);
+      border-radius:22px;
+      padding:28px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      backdrop-filter: blur(8px);
+      display:flex;gap:20px;align-items:flex-start;
+      color:#fff;
     }
-    .avatar:hover {
-      transform: scale(1.1) rotate(5deg);
+    .left{
+      width:260px;text-align:center;
     }
+    .avatar{
+      width:150px;height:150px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.12);
+      box-shadow:0 6px 18px rgba(0,0,0,0.6);
+    }
+    .name{font-size:36px;margin:12px 0 6px;font-weight:700;letter-spacing:0.5px}
+    .bio{opacity:0.9;color:rgba(255,255,255,0.85);line-height:1.5}
 
-    .links a {
-      display: block;
-      margin: 12px 0;
-      padding: 12px;
-      background: rgba(255,255,255,0.15);
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 0 rgba(255,255,255,0);
+    .right{flex:1}
+    .icons{margin-top:8px;display:flex;gap:10px;justify-content:flex-start}
+    .icon{
+      width:44px;height:44px;border-radius:10px;background:var(--soft);display:inline-flex;align-items:center;justify-content:center;
+      box-shadow:0 6px 18px rgba(0,0,0,0.4);cursor:pointer;transition:all .18s;
     }
-    .links a:hover {
-      background: rgba(255,255,255,0.3);
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255,255,255,0.6);
+    .icon:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
+    .info-row{margin-top:18px;background:rgba(255,255,255,0.03);padding:14px;border-radius:14px;display:flex;justify-content:space-between;align-items:center}
+
+    /* floating game button top-right */
+    .game-btn{
+      position:fixed;right:22px;top:18px;z-index:3;
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg,var(--accent),#17778a);
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;cursor:pointer;
+      box-shadow:0 10px 30px rgba(0,0,0,0.5), inset 0 -2px 6px rgba(255,255,255,0.06);
+      transition:transform .15s;
+    }
+    .game-btn:hover{transform:translateY(-5px) scale(1.02)}
+
+    /* Modal overlay for game */
+    .modal{
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:10;
+      background:linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.65));
+    }
+    .modal.open{display:flex}
+    .game-panel{
+      width:640px;max-width:95%;background:rgba(10,12,15,0.95);border-radius:14px;padding:18px;box-shadow:0 30px 80px rgba(0,0,0,0.7);
+      display:flex;gap:16px;align-items:flex-start;
+    }
+    .game-canvas{background:#0b1216;border-radius:8px;box-shadow:inset 0 3px 8px rgba(255,255,255,0.02);display:block}
+    .game-controls{width:260px;color:#fff}
+    .game-controls h3{margin:0 0 12px;font-size:20px}
+    .ctrl-row{display:flex;gap:8px;margin-bottom:10px}
+    .ctrl-row button{flex:1;padding:10px;border-radius:10px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+    .small{font-size:13px;opacity:0.9}
+    .close-btn{background:transparent;border:0;color:#fff;font-size:20px;cursor:pointer;position:absolute;right:26px;top:18px}
+
+    /* responsive */
+    @media (max-width:880px){
+      .card{flex-direction:column;align-items:center;padding:18px}
+      .left{width:100%}
+      .right{width:100%}
+      .game-controls{width:200px}
+      .game-panel{flex-direction:column;align-items:center}
     }
   </style>
 </head>
 <body>
+  <!-- rain effect canvas -->
+  <canvas id="rainCanvas"></canvas>
 
-  <div class="card">
-   <img src="https://raw.githubusercontent.com/DONI1610/doni/main/ảnh%20nền.png" alt="Avatar" class="avatar" />
-    <h2>DONI </h2>
-    <p>Chào mừng bạn đến với bio của mình ✨</p>
-    <div class="links">
-      <a href="https://www.facebook.com/DONIxSUN" target="_blank">🌐 Facebook</a>
-      <a href="https://www.tiktok.com/@doni_z2" target="_blank">📷 tiktok</a>
-      <a href="https://github.com/" target="_blank">💻 GitHub</a>
+  <!-- floating button to open game -->
+  <div class="game-btn" id="openGame" title="Chơi Snake">🐍</div>
+
+  <!-- main bio card -->
+  <div class="card" role="main">
+    <div class="left">
+      <!-- sử dụng ảnh bạn đã up ở repo (raw link). Nếu khác thì đổi URL -->
+      <img class="avatar" src="https://raw.githubusercontent.com/DONI1610/doni/main/%E1%BA%A3nh%20n%E1%BB%81n.png" alt="avatar">
+      <div class="name">Doni</div>
+      <div class="bio">Em đi qua đời tôi như cơn mưa đầu hạ, để lại mảnh trời đầy kỷ niệm chẳng thể phai!</div>
+      <div class="icons" style="justify-content:center">
+        <a class="icon" href="#" title="Facebook">f</a>
+        <a class="icon" href="#" title="TikTok">t</a>
+        <a class="icon" href="#" title="Discord">d</a>
+        <a class="icon" href="#" title="Mail">✉</a>
+      </div>
+    </div>
+
+    <div class="right">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:18px;font-weight:700">128 cảm ơn</div>
+        <div style="opacity:0.85">📍 Việt Nam</div>
+      </div>
+
+      <div class="info-row" style="margin-top:18px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <img src="https://raw.githubusercontent.com/DONI1610/doni/main/%E1%BA%A3nh%20n%E1%BB%81n.png" alt="mini" style="width:56px;height:56px;border-radius:50%;object-fit:cover">
+          <div style="font-weight:700">Doni</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:28px;color:#ff5a6b">❤</div>
+          <div class="small">1</div>
+        </div>
+        <div style="text-align:right">
+          <div style="width:56px;height:56px;border-radius:50%;background:#000"></div>
+          <div class="small" style="margin-top:6px">zin</div>
+        </div>
+      </div>
+
+      <!-- extra area (placeholder) -->
+      <div style="margin-top:18px;padding:14px;background:rgba(255,255,255,0.02);border-radius:12px">
+        <div style="opacity:0.9">👀 33 lượt xem &nbsp; • &nbsp; ❤️ 1</div>
+      </div>
     </div>
   </div>
 
+  <!-- Modal for snake game -->
+  <div class="modal" id="modalGame" aria-hidden="true">
+    <div class="game-panel" role="dialog" aria-modal="true" aria-label="Snake Game">
+      <canvas id="snakeCanvas" class="game-canvas" width="420" height="420"></canvas>
+      <div class="game-controls">
+        <h3>Snake — Trò chơi</h3>
+        <div class="small">Hướng dẫn: Dùng phím mũi tên hoặc W A S D để điều khiển.</div>
+        <div class="ctrl-row">
+          <button id="btnPlayPause">▶ / ⏸</button>
+          <button id="btnRestart">🔁 Restart</button>
+        </div>
+        <div style="margin-top:8px">
+          <div class="small">Điểm: <span id="score">0</span></div>
+          <div class="small">Tốc độ: <span id="speedVal">8</span> fps</div>
+        </div>
+
+        <div style="margin-top:12px">
+          <label class="small">Chọn tốc độ:</label>
+          <input id="speed" type="range" min="4" max="20" value="8" style="width:100%;margin-top:6px">
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:8px">
+          <button id="btnClose" style="flex:1;background:#333">Đóng</button>
+        </div>
+      </div>
+      <button class="close-btn" id="modalClose">✕</button>
+    </div>
+  </div>
+
+<script>
+/* ------- Rain effect (simple) ------- */
+const rainCanvas = document.getElementById('rainCanvas');
+const rctx = rainCanvas.getContext('2d');
+function resizeRain(){
+  rainCanvas.width = innerWidth;
+  rainCanvas.height = innerHeight;
+}
+resizeRain();
+window.addEventListener('resize', resizeRain);
+
+class Drop {
+  constructor(){
+    this.reset();
+  }
+  reset(){
+    this.x = Math.random()*rainCanvas.width;
+    this.y = Math.random()*rainCanvas.height - rainCanvas.height;
+    this.len = 8 + Math.random()*18;
+    this.speed = 2 + Math.random()*4;
+    this.alpha = 0.15 + Math.random()*0.7;
+    this.color = `rgba(255,60,60,${this.alpha})`;
+  }
+  fall(){
+    this.y += this.speed;
+    if(this.y > rainCanvas.height + this.len) this.reset();
+  }
+  draw(){
+    rctx.beginPath();
+    rctx.strokeStyle = this.color;
+    rctx.lineWidth = 2;
+    rctx.moveTo(this.x, this.y);
+    rctx.lineTo(this.x, this.y + this.len);
+    rctx.stroke();
+  }
+}
+let drops = [];
+for(let i=0;i<140;i++) drops.push(new Drop());
+
+(function rainLoop(){
+  rctx.clearRect(0,0,rainCanvas.width,rainCanvas.height);
+  for(let d of drops){ d.fall(); d.draw(); }
+  requestAnimationFrame(rainLoop);
+})();
+
+/* ------- Modal open/close logic ------- */
+const openGameBtn = document.getElementById('openGame');
+const modal = document.getElementById('modalGame');
+const modalClose = document.getElementById('modalClose');
+const btnClose = document.getElementById('btnClose');
+
+function openModal(){
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+  startGame(); // start or unpause game when opened
+}
+function closeModal(){
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+  pauseGame();
+}
+openGameBtn.addEventListener('click', openModal);
+modalClose.addEventListener('click', closeModal);
+btnClose.addEventListener('click', closeModal);
+
+/* ------- Snake Game ------- */
+const canvas = document.getElementById('snakeCanvas');
+const ctx = canvas.getContext('2d');
+const scoreEl = document.getElementById('score');
+const speedInput = document.getElementById('speed');
+const speedVal = document.getElementById('speedVal');
+let grid = 20; // cell size
+let cols = Math.floor(canvas.width / grid);
+let rows = Math.floor(canvas.height / grid);
+let snake = [{x: Math.floor(cols/2), y: Math.floor(rows/2)}];
+let dir = {x:1,y:0};
+let food = null;
+let running = false;
+let intervalId = null;
+let fps = parseInt(speedInput.value);
+
+function placeFood(){
+  food = {
+    x: Math.floor(Math.random()*cols),
+    y: Math.floor(Math.random()*rows)
+  };
+  // avoid spawning on snake
+  for(let s of snake){
+    if(s.x===food.x && s.y===food.y) { placeFood(); return; }
+  }
+}
+
+function resetGame(){
+  snake = [{x: Math.floor(cols/2), y: Math.floor(rows/2)}];
+  dir = {x:1,y:0};
+  placeFood();
+  scoreEl.innerText = 0;
+}
+
+function draw(){
+  // background
+  ctx.fillStyle = '#081016';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // draw food
+  ctx.fillStyle = '#ff4757';
+  ctx.fillRect(food.x*grid+2, food.y*grid+2, grid-4, grid-4);
+
+  // draw snake
+  for(let i=0;i<snake.length;i++){
+    const s = snake[i];
+    ctx.fillStyle = i===0 ? '#f6f7f9' : '#9aa7ad';
+    ctx.fillRect(s.x*grid+1, s.y*grid+1, grid-2, grid-2);
+  }
+}
+
+function update(){
+  // move head
+  const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+
+  // wrap-around
+  if(head.x < 0) head.x = cols-1;
+  if(head.x >= cols) head.x = 0;
+  if(head.y < 0) head.y = rows-1;
+  if(head.y >= rows) head.y = 0;
+
+  // check collision with body
+  for(let i=0;i<snake.length;i++){
+    if(snake[i].x===head.x && snake[i].y===head.y){
+      // game over -> restart
+      resetGame();
+      return;
+    }
+  }
+
+  snake.unshift(head);
+
+  // eat food?
+  if(head.x===food.x && head.y===food.y){
+    // increase score
+    scoreEl.innerText = parseInt(scoreEl.innerText) + 1;
+    placeFood();
+  } else {
+    snake.pop();
+  }
+}
+
+function gameLoop(){
+  update();
+  draw();
+}
+
+function startGame(){
+  if(!food) placeFood();
+  if(!running){
+    running = true;
+    fps = parseInt(speedInput.value);
+    intervalId = setInterval(gameLoop, 1000 / fps);
+  }
+}
+
+function pauseGame(){
+  if(running){
+    running = false;
+    clearInterval(intervalId);
+    intervalId = null;
+  }
+}
+
+function restartGame(){
+  resetGame();
+  pauseGame();
+  startGame();
+}
+
+/* controls */
+document.getElementById('btnPlayPause').addEventListener('click', () => {
+  if(running) pauseGame(); else startGame();
+});
+document.getElementById('btnRestart').addEventListener('click', restartGame);
+
+speedInput.addEventListener('input', () => {
+  speedVal.innerText = speedInput.value;
+  if(running){
+    clearInterval(intervalId);
+    intervalId = setInterval(gameLoop, 1000 / parseInt(speedInput.value));
+  }
+});
+
+/* keyboard */
+window.addEventListener('keydown', (e) => {
+  const key = e.key;
+  if(!modal.classList.contains('open')) return; // only when modal open
+  if(key === 'ArrowUp' || key === 'w' || key === 'W'){ if(dir.y!==1){dir={x:0,y:-1}} }
+  if(key === 'ArrowDown' || key === 's' || key === 'S'){ if(dir.y!==-1){dir={x:0,y:1}} }
+  if(key === 'ArrowLeft' || key === 'a' || key === 'A'){ if(dir.x!==1){dir={x:-1,y:0}} }
+  if(key === 'ArrowRight' || key === 'd' || key === 'D'){ if(dir.x!==-1){dir={x:1,y:0}} }
+  if(key === ' '){ // space toggle play/pause
+    if(running) pauseGame(); else startGame();
+  }
+});
+
+/* init */
+resetGame();
+draw();
+
+// Ensure canvas sizing grid is correct on resize
+window.addEventListener('resize', ()=>{
+  // keep canvas size same but recompute cols/rows
+  cols = Math.floor(canvas.width / grid);
+  rows = Math.floor(canvas.height / grid);
+});
+</script>
 </body>
 </html>
-
-
