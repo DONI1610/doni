@@ -214,19 +214,21 @@
     <h1 class="text typewriter">Merry Christmas</h1>
     <p class="christmas-wish">Nếu em chưa có ai bên cạnh thì hãy để anh ngỏ lời và chúng mình cùng đi cùng nhau qua mùa noel này nhé!</p>
 
-   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script> 
-
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MorphSVGPlugin.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/DrawSVGPlugin.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Physics2DPlugin.min.js"></script>
-
-<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.js" type="module"></script>
-    
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.js" type="module"></script>
     <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
     <dotlottie-player class="santa-claus" src="https://lottie.host/6d0dfa5c-028c-4847-8389-06304eb1b01e/5TtJvD6xoM.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+    
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script> 
 
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/DrawSVGPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MorphSVGPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Physics2DPlugin.min.js"></script>
+    
     <script>
+        // *** Dòng SỬA LỖI QUAN TRỌNG: Đăng ký các plugins cho GSAP 3 ***
+        gsap.registerPlugin(MorphSVGPlugin, DrawSVGPlugin, MotionPathPlugin, Physics2DPlugin);
+        
         MorphSVGPlugin.convertToPath('polygon');
         var xmlns = "http://www.w3.org/2000/svg",
             xlinkns = "http://www.w3.org/1999/xlink",
@@ -465,6 +467,7 @@
 </body>
 
 </html>
+
 
 
 
