@@ -1,1277 +1,280 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doni</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-         
-    <link rel="stylesheet" href="https://zyo.lol/template/css/bio.css?ver=792797245">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-    <link rel="stylesheet" href="https://zyo.lol/template/css/tippy_scale.css" />
-    <link rel="stylesheet" href="https://zyo.lol/template/css/nouislider.min.css" />
-    <link rel="stylesheet" href="https://zyo.lol/template/css/aos.css" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://zyo.lol/template/css/iziToast.min.css" />
-    <link rel="icon" type="image/x-icon" href="./template/img/logo.ico">
-    <meta name="theme-color" content="#1a1a1a">
-    <meta name="description" content="Em đi qua đời tôi như cơn mưa đầu hạ, để lại mảnh trời đầy kỷ niệm chẳng thể phai !">
-    <meta name="author" content="Doni | zyo.lol">
-    <meta property="og:title" content="Doni | zyo.lol">
-    <meta property="og:description" content="Em đi qua đời tôi như cơn mưa đầu hạ, để lại mảnh trời đầy kỷ niệm chẳng thể phai !">
-    <meta property="og:image" content="https://r2.zyo.lol/background_3654f4284427.jpg">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Doni | zyo.lol">
-    <meta name="twitter:description" content="Em đi qua đời tôi như cơn mưa đầu hạ, để lại mảnh trời đầy kỷ niệm chẳng thể phai !">
-    <meta name="twitter:image" content="https://r2.zyo.lol/background_3654f4284427.jpg">
-    <!-- font 4 bio -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet"></head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S74ZMJ88EG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <title>Merry Christmas</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #00050a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  gtag('config', 'G-S74ZMJ88EG');
-</script>
-<div id="overlay" class="overlay"></div>
-<div closeoutsidepopup="" class="popup_content_container" id="link_preview_container" style="display: none;">
-    <h1 class="header">Do you want to visit this site?</h1>
-    <div class="input_content">
-        <div class="center">
-            <input type="text" name="alias" class="input" id="link_preview" readonly>
-        </div>
-        <div class="flex">
-            <button class="close-button" onclick="closePopup('link_preview_container')">Go Back</button>
-            <a class="button_submit" id="link_preview_button" style="width: 100px">Visit Site</a>
-        </div>
-    </div>
-</div>
-<style>
-    * {
-        font-family: 'Outfit', sans-serif;        font-optical-sizing: auto;
-        font-weight: 400;
-        font-style: normal;
-        font-variation-settings: "slnt" 0;
-        box-sizing: border-box;
-                cursor: url("https://r2.zyo.lol/cursor_783443d1e4f1.jpg") 16 16, auto !important;
+        #treeCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .main-container {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* MẶC ĐỊNH CHO MÁY TÍNH (NGANG) */
+        .left-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            pointer-events: none;
+        }
+
+        .right-side {
+            flex: 1;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.07);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            pointer-events: auto;
+            max-width: 350px;
+        }
+
+        /* FIX CHO ĐIỆN THOẠI (DỌC) */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                /* Chuyển thành hàng dọc */
+                justify-content: flex-start;
+                padding-top: 50px;
             }
+
+            .left-side {
+                flex: none;
+                width: 100%;
+                padding: 20px;
+                order: 1;
+                /* Chữ nằm trên */
+            }
+
+            .right-side {
+                flex: 1;
+                width: 100%;
+                order: 2;
+                /* Cây nằm dưới */
+            }
+
+            .card {
+                max-width: 80%;
+                /* Thẻ chữ co giãn theo màn hình */
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px !important;
+            }
+
+            p {
+                font-size: 15px !important;
+            }
+        }
+
+        h1 {
+            font-size: 40px;
+            margin: 0 0 15px 0;
+            color: white;
+            text-shadow: 0 0 10px red;
+            animation: glow 2s infinite alternate;
+        }
+
+        p {
+            color: #eee;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px red;
+            }
+
+            to {
+                text-shadow: 0 0 30px gold;
+            }
+        }
+
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
+        }
+
+        .music-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            z-index: 20;
+        }
     </style>
-<style>
-    .tippy-content {
-                                    font-size: 15.5px;
-                        }
-</style>
-<script>
-                    const fontSize = 1.5;
-                const textElements = document.querySelectorAll('p, span, h1, h2, h3, h4, h5, h6, .tippy-content');
-    textElements.forEach(el => {
-        const currentSize = window.getComputedStyle(el).fontSize;
-        const newSize = parseFloat(currentSize) + fontSize ?? 0;
-        el.style.fontSize = `${newSize}px`;
-    });
-</script>
-<style>
-    ::selection {
-        background: #ffffff;
-                color: #010101;
-            }
-</style>
-<style>
-    .bio-container {
-                    --iconGlow: drop-shadow(#ffffff 1px 0 7px);
-                --badgeColor: #01e659;
-                    --badgeGlow: drop-shadow(#01e659 1px 0 7px);
-                            --audioControlColor: #ffffff ;
-            --audioControlRgba05: rgba(255, 255, 255, 0.5);
-                            --avatarRadius: 48.5%;
-            }
-</style>
-    <div class="background" id="background" style="background: url(https://r2.zyo.lol/background_3654f4284427.jpg)"></div>
-    <audio crossOrigin="anonymous" id="audio"></audio>
-    <div style="width: 100vw; height: 100vh; position: absolute;" >
-        <canvas style="width:100%, height: 100%;" id="rainEffect"></canvas>
-    </div>
-<script>
-    function createSlider(sliderId, sliderValueId, unit) {
-        var slider = document.getElementById(sliderId);
-        var sliderInput = document.getElementById(sliderValueId);
-
-        var startValue = sliderInput.value ? Number(sliderInput.value) : 0;
-
-        noUiSlider.create(slider, {
-            start: startValue,
-            connect: [true, false],
-            step: 1,
-            range: {
-                'min': 0,
-                'max': 100
-            },
-            format: {
-                to: function (value) {
-                    return value + unit;
-                },
-                from: function (value) {
-                    return Number(value.replace(unit, ''));
-                }
-            }
-        });
-
-        let isSliding = false;
-
-        slider.noUiSlider.on('update', function (values, handle) {
-            const valueInt = values[handle];
-            sliderInput.value = valueInt.replace(unit, '');
-        });
-    }
-</script>
-<script src="./template/js/iziToast.min.js" type="text/javascript"></script>
-<!-- <script src="./template/js/nouislider.min.js" type="text/javascript"></script> -->
-<script src="./template/js/typewritter.min.js" type="text/javascript"></script>
-<script src="./template/js/main.js?v=1.9.3" type="text/javascript"></script>
-<script src="./template/js/aos.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        AOS.init({
-            duration: 800,
-            easing: "ease-in-out",
-            once: true,
-            offset: 100,
-        })
-    })
-</script><head>
 </head>
-<body class="profile-body-1" style=" background: #000000">
-        <div class="overlay_audio" onclick="hideOverlay()">
-        <p class="text">welcome , click !</p>
+
+<body>
+
+    <canvas id="treeCanvas"></canvas>
+
+    <div class="main-container">
+        <div class="left-side">
+            <div class="card">
+                <h1>MERRY CHRISTMAS</h1>
+                <p>Chúc bạn một Giáng sinh vui vẻ, ấm áp và hạnh phúc!</p>
+            </div>
+        </div>
+        <div class="right-side"></div>
     </div>
-            <div class="revealAudioLike" style="
-            --audioLikeColor: #ffffff;
-            --audioLikeRgba05: rgba(255, 255, 255, 0.5);
-            --audioLikeRgba02: rgba(255, 255, 255, 0.2);
-        ">
-                    <div class="audio_control" id="audio_control" >
-                <div class="">
-                    <svg class="volumeIcon" onclick="toggleActive(this);" id="volumeIcon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48" style="cursor: pointer;"><defs><mask id="volumeMedium"><g fill="none" stroke="#fff" stroke-width="4"><path fill="#555" stroke-linejoin="round"d="M24 6v36c-7 0-12.201-9.16-12.201-9.16H6a2 2 0 0 1-2-2V17.01a2 2 0 0 1 2-2h5.799S17 6 24 6Z" /><path stroke-linecap="round" stroke-linejoin="round"d="M32 15a12 12 0 0 1 1.684 1.859A12.07 12.07 0 0 1 36 24c0 2.654-.846 5.107-2.278 7.09A12 12 0 0 1 32 33" /><path stroke-linecap="round"d="M34.236 41.186C40.084 37.696 44 31.305 44 24c0-7.192-3.796-13.496-9.493-17.02" /></g></mask></defs><path id="changeMask" fill="currentColor" d="M0 0h48v48H0z" mask="url(#volumeMedium)" /></svg>
-                </div>    
-                <div class="slider-container">
-                    <div id="slider1"></div>
-                    <input type="hidden" name="bgOpacity" id="sliderValue1" value="100" readonly>
-                </div>
-            </div>
-                        <label for="likeButton" class="like_button" onclick="toggleActive(this);">
-            <input style="display: none;" value="1" checked name="likeStatus" type="checkbox" id="likeButton">
-            <svg class="likeIcon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 32 32" xml:space="preserve"><path d="M23 3a8 8 0 0 0-7 4.13A8 8 0 0 0 9 3a8 8 0 0 0-8 8c0 11 12.857 18 15 18s15-7 15-18a8 8 0 0 0-8-8M9 7c-2.206 0-4 1.794-4 4a1 1 0 0 1-2 0c0-3.309 2.691-6 6-6a1 1 0 0 1 0 2"/></svg>
-        </label>
-            </div>
-        <div class="bio-container" style="
-        --nameColor: #ffffff;
-        --nameColor25: rgba(255, 255, 255, 0.25);
-        --descriptionColor: #b3b3b3;
-        --backgroundColor: rgba(26, 26, 26, 0.21);
-        --iconColor: #ffffff;
-        --backgroundBlur: 100px;
-        --nameGlow: 0px 0px 16.5px #ffffff;
-        --descriptionGlow: 0px 0px 16.5px #b3b3b3;
-        --discordBackground: rgba(26, 26, 26, 0.2);
-        --discordBorder: rgba(26, 26, 26, 0.1);
-        --discordDescription: rgba(255, 255, 255, 0.7);
-                --borderRadius: 25px;
-        --bioWidth: 730px;
-    ">
-        <div class="bio_content_container">
-            <div class="content-container css_content_container reveal">
-                                    <div class="bio_small_infomation">
-                                                <div class="bio_infomation" data-tippy-content="Like">
-                                                            <svg class="likeIcon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 32 32" xml:space="preserve"><path d="M23 3a8 8 0 0 0-7 4.13A8 8 0 0 0 9 3a8 8 0 0 0-8 8c0 11 12.857 18 15 18s15-7 15-18a8 8 0 0 0-8-8M9 7c-2.206 0-4 1.794-4 4a1 1 0 0 1-2 0c0-3.309 2.691-6 6-6a1 1 0 0 1 0 2"></path></svg>
-                                <p class="text" id="likeCount">1</p>
-                                                    </div>
-                        
-                                                <div class="border"></div>
-                        
-                        
-                                                <div class="bio_infomation" data-tippy-content="Profile Views">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"></path></svg>
-                                <p class="text">39</p>
-                                                    </div>
-                        
-                                                <div class="border"></div>
-                        
-                                                <div class="bio_infomation" data-tippy-content="Location">
-                            <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.574 21.819a1 1 0 0 1-1.149 0l-.002-.002-.006-.004-.018-.014a10 10 0 0 1-.305-.225A25 25 0 0 1 7.757 18.5C5.964 16.508 4 13.61 4 10.364c0-2.203.831-4.324 2.325-5.896C7.821 2.894 9.861 2 12 2s4.179.894 5.674 2.468C19.17 6.04 20 8.16 20 10.364c0 3.246-1.964 6.144-3.757 8.135a25 25 0 0 1-3.337 3.075 15 15 0 0 1-.305.225l-.018.014-.006.004h-.002zM9 10a3 3 0 1 1 6 0 3 3 0 0 1-6 0"/></svg>
-                            <p class="text">Viêt Nam</p>
-                        </div>
-                                            </div>
-                                <div class="content">
-                    <div class="top cardLeft infoRow">
-                        <div class="img_container">
-                            <img src="https://r2.zyo.lol/avatar_7a2235b377c3.jpg" alt="" class="img">
-                                                            <img class="img_effect" style="" src="https://cdn.discordapp.com/avatar-decoration-presets/a_3c97a2d37f433a7913a1c7b7a735d000">
-                                                    </div>
-                        <div class="flex-column">
-                            <div class="flex">
-                                                                    <p data-tippy-content='UID 5,957 ' class="header" id="userName">Doni</p>
-                                                                                            </div>
-                                                            <p id="bio_description" class="bio_description">Em đi qua đời tôi như cơn mưa đầu hạ, để lại mảnh trời đầy kỷ niệm chẳng thể phai !</p>
-                                                                                        <div class="svg_container" style="">
-                                                                                                                                                            <a href="https://facebook.com/DONIxSUN" target="_blank" rel="noopener noreferrer" class="svg_item singleColor">
-                                                <svg id="facebookSvg" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="2 2 20 19.95"><path fill="currentColor" d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95"></path></svg>                                            </a>
-                                                                                                                                                                                                                                        <a href="https://tiktok.com/@doni_z2" target="_blank" rel="noopener noreferrer" class="svg_item singleColor">
-                                                <svg id="tiktokSvg" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="Currentcolor" viewBox="0 0 448 512"><path d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"></path></svg>                                            </a>
-                                                                                                                                                                                                                                        <a href="https://discord.com/1194620716352536577" target="_blank" rel="noopener noreferrer" class="svg_item singleColor">
-                                                <svg id="discordSvg" viewBox="0 0 24 24" width="1em" height="1em" fill="Currentcolor" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"></path></svg>                                            </a>
-                                                                                                                                                                                                                                        <button onclick="copyTextFromParent(this)" class="svg_item singleColor">
-                                                <svg id="emailSvg" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="2 4 20 16"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4l-8 5l-8-5V6l8 5l8-5z"></path></svg>                                                <p class="svg_text" style="display: none"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f5908198879a82b59298949c99db969a98">[email&#160;protected]</a></p>
-                                            </button>
-                                                                                                                                                                                                                                        <button onclick="openPopupPreview('https://i.ibb.co/hJ1r8K07/Screenshot-2025-07-14-201437.jpg')" target="_blank" rel="noopener noreferrer" class="svg_item singleColor">
-                                                <img src="https://r2.zyo.lol/socialImg_fee7ef4e12b5.jpg" class="img">
-                                            </button>
-                                                                                                                                                </div>
-                                                    </div>
-                    </div>
-                                                                                                </div>
-            </div>
-                            <div class="audio_container css_content_container reveal" style="padding: 15px;">
-                    <div id="audio_avatar_container">
-                                                    <svg class="audio_image_svg" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512">
-                                <path id="ignore" d="M406.3 48.2c-4.7.9-202 39.2-206.2 40-4.2.8-8.1 3.6-8.1 8v240.1c0 1.6-.1 7.2-2.4 11.7-3.1 5.9-8.5 10.2-16.1 12.7-3.3 1.1-7.8 2.1-13.1 3.3-24.1 5.4-64.4 14.6-64.4 51.8 0 31.1 22.4 45.1 41.7 47.5 2.1.3 4.5.7 7.1.7 6.7 0 36-3.3 51.2-13.2 11-7.2 24.1-21.4 24.1-47.8V190.5c0-3.8 2.7-7.1 6.4-7.8l152-30.7c5-1 9.6 2.8 9.6 7.8v130.9c0 4.1-.2 8.9-2.5 13.4-3.1 5.9-8.5 10.2-16.2 12.7-3.3 1.1-8.8 2.1-14.1 3.3-24.1 5.4-64.4 14.5-64.4 51.7 0 33.7 25.4 47.2 41.8 48.3 6.5.4 11.2.3 19.4-.9s23.5-5.5 36.5-13c17.9-10.3 27.5-26.8 27.5-48.2V55.9c-.1-4.4-3.8-8.9-9.8-7.7z" fill="currentColor"></path>
-                            </svg>
-                                            </div>
-                    <div class="audio_content_container">
-                                                    <h1 class="name" id="musicName"></h1>
-                                                <div class="flex">
-                            <span class="duration" id="currentTime">0:00</span>
-                            <div class="slideTrack" id="slideTrack"></div>
-                            <span style="margin-right: 8px" class="duration" id="totalTime">0:00</span>
-                            <button id="backward">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 51.532 51.532" fill="currentColor" xml:space="preserve"><path d="M6.631 1.963a6.63 6.63 0 0 1 6.631 6.631V23.81a4 4 0 0 1 1-.831l31.27-18.053a3.998 3.998 0 0 1 6 3.464v36.105a4 4 0 0 1-6 3.463l-31.27-18.053a4 4 0 0 1-1-.83v13.863a6.631 6.631 0 0 1-13.262 0V8.594a6.63 6.63 0 0 1 6.631-6.631"/></svg>
-                            </button>
-                            <button id="playPause">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M15 16h-2V8h2m-4 8H9V8h2m1-6A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg>
-                            </button>
-                            <button id="forward">
-                                <svg style="transform: rotate(180deg)" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51.532 51.532" fill="currentColor" xml:space="preserve"><path d="M6.631 1.963a6.63 6.63 0 0 1 6.631 6.631V23.81a4 4 0 0 1 1-.831l31.27-18.053a3.998 3.998 0 0 1 6 3.464v36.105a4 4 0 0 1-6 3.463l-31.27-18.053a4 4 0 0 1-1-.83v13.863a6.631 6.631 0 0 1-13.262 0V8.594a6.63 6.63 0 0 1 6.631-6.631"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                    </div>
-    </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"c8fdcc55826a42c5a2f73fa9a9e6223c","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+
+    <div class="music-hint">Chạm để nghe nhạc 🎵</div>
+    <audio id="bg-music" loop>
+        <source src="noel_web.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const canvas = document.getElementById("treeCanvas");
+        const ctx = canvas.getContext("2d");
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        // TỰ ĐỘNG CĂN GIỮA CÂY TÙY THEO MÀN HÌNH
+        const CENTER_X = () => {
+            if (window.innerWidth <= 768) {
+                return canvas.width * 0.5; // Điện thoại: Cây nằm giữa màn hình
+            }
+            return canvas.width * 0.72; // Máy tính: Cây nằm bên phải
+        };
+
+        const BASE_Y = () => {
+            if (window.innerWidth <= 768) {
+                return canvas.height * 0.9; // Điện thoại: Đẩy cây xuống thấp hơn
+            }
+            return canvas.height * 0.8;
+        };
+
+        const TREE_HEIGHT = 300;
+        const MAX_RADIUS = 120;
+        const LIGHT_COUNT = 2000;
+        let angle = 0;
+
+        const lights = [];
+        for (let i = 0; i < LIGHT_COUNT; i++) {
+            const h = (1 - Math.pow(Math.random(), 0.6)) * TREE_HEIGHT;
+            const maxR = MAX_RADIUS * (1 - h / TREE_HEIGHT);
+            const radius = Math.sqrt(Math.random()) * maxR;
+            const theta = Math.random() * Math.PI * 2;
+            lights.push({ h, radius, theta, speed: 0.03 + Math.random() * 0.08, glow: Math.random() * Math.PI * 2, isTrunk: false });
+        }
+        for (let i = 0; i < 200; i++) {
+            const h = -Math.random() * 40;
+            const radius = Math.sqrt(Math.random()) * 15;
+            const theta = Math.random() * Math.PI * 2;
+            lights.push({ h, radius, theta, speed: 0.04, glow: Math.random() * Math.PI * 2, isTrunk: true });
+        }
+
+        function drawStar(cx, cy) {
+            ctx.save();
+            ctx.translate(cx, cy - TREE_HEIGHT - 15);
+            ctx.fillStyle = "gold"; ctx.shadowColor = "gold"; ctx.shadowBlur = 30;
+            ctx.beginPath();
+            for (let i = 0; i < 5; i++) {
+                ctx.lineTo(Math.cos((18 + i * 72) * Math.PI / 180) * 14, -Math.sin((18 + i * 72) * Math.PI / 180) * 14);
+                ctx.lineTo(Math.cos((54 + i * 72) * Math.PI / 180) * 6, -Math.sin((54 + i * 72) * Math.PI / 180) * 6);
+            }
+            ctx.closePath(); ctx.fill(); ctx.restore();
+        }
+
+        function animate() {
+            ctx.fillStyle = "rgba(0, 5, 10, 0.8)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const cx = CENTER_X(); const by = BASE_Y();
+            angle += 0.015;
+
+            const rendered = lights.map(l => {
+                const rad = l.theta + angle;
+                return { ...l, x3d: Math.cos(rad) * l.radius, z3d: Math.sin(rad) * l.radius };
+            });
+            rendered.sort((a, b) => a.z3d - b.z3d);
+
+            rendered.forEach(l => {
+                l.glow += l.speed;
+                const brightness = Math.sin(l.glow) * 0.5 + 0.5;
+                const viewScale = (l.z3d + MAX_RADIUS) / (2 * MAX_RADIUS);
+                const heightScale = 1 - (l.h / TREE_HEIGHT) * 0.4;
+                const size = (l.isTrunk ? 1.0 : 1.7) * (viewScale * 0.4 + 0.6) * heightScale;
+                const opacity = (0.4 + viewScale * 0.6) * (0.6 + brightness * 0.4);
+                if (l.isTrunk) ctx.fillStyle = `rgba(160, 100, 60, ${opacity})`;
+                else {
+                    const g = 140 + brightness * 115;
+                    ctx.fillStyle = `rgba(255, ${g}, 70, ${opacity})`;
+                }
+                ctx.beginPath(); ctx.arc(cx + l.x3d, by - l.h, size, 0, Math.PI * 2); ctx.fill();
+            });
+            drawStar(cx, by);
+            requestAnimationFrame(animate);
+        }
+
+        function createSnow() {
+            const snow = document.createElement('div');
+            snow.className = 'snowflake';
+            snow.innerText = ['❄', '❅', '❆'][Math.floor(Math.random() * 3)];
+            snow.style.left = Math.random() * 100 + 'vw';
+            const size = Math.random() * 10 + 10;
+            snow.style.fontSize = size + 'px';
+            const duration = Math.random() * 5 + 7;
+            snow.style.animation = `fall ${duration}s linear forwards`;
+            document.body.appendChild(snow);
+            setTimeout(() => snow.remove(), duration * 1000);
+        }
+
+        animate();
+        setInterval(createSnow, 200);
+        const music = document.getElementById("bg-music");
+        document.addEventListener("click", () => { music.play(); document.querySelector('.music-hint').style.display = 'none'; }, { once: true });
+    </script>
 </body>
-<script src="./template/js/popper.min.js?v=1.0.1"></script>
-<script src="./template/js/tippy-bundle.umd.min.js?v=1.0.1"></script>
-<script src="./template/js/cursoreffect.min.js?v=1.0.1"></script>
-<script src="./template/js/nouislider.min.js?v=1.0.1" type="text/javascript"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // tooltip
-        tippy('[data-tippy-content]', {
-            theme: 'tooltip_container',
-            arrow: false,
-            allowHTML: true,
-            maxWidth: '92vw',
-            animation: 'scale',
-            delay: [0, 150],
-        });
-    });
-    function copyTextFromParent(parentElement) {
-        const paragraph = parentElement.querySelector('p');
 
-        if (paragraph) {
-            const textToCopy = paragraph.textContent;
-
-            const textarea = document.createElement('textarea');
-            textarea.value = textToCopy;
-            document.body.appendChild(textarea);
-
-            textarea.select();
-            document.execCommand('copy');
-
-            document.body.removeChild(textarea);
-
-            showSuccessPopup('Text copied ' + textToCopy);
-        } else {
-            showErrorPopup('Something went wrong!');
-        }
-    }
-    function revealElements() {
-        const reveals = document.querySelectorAll('.reveal');
-        for (let i = 0; i < reveals.length; i++) {
-            reveals[i].classList.add('active');
-        }
-    }
-    const background = document.getElementById('background');
-            createRainEffect('rainEffect', 300, 'rgba(235, 4, 4, 0.5)');
-    </script>
-<script>
-    function adjustChildPosition() {
-        const parent = document.querySelector('.css_content_container');
-        const child = document.querySelector('.bio_small_infomation');
-        const styles = window.getComputedStyle(parent);
-        const borderRadius = parseFloat(styles.borderRadius);
-        const bottom = 12 + 0.16 * (borderRadius - 25);
-        const left = 15 + 0.16 * (borderRadius - 25);
-        child.style.bottom = `${bottom}px`;
-        child.style.left = `${left}px`;
-    }
-    adjustChildPosition();
-</script>
-<script>
-    function revealAudioLike() {
-        const revealsAudio = document.querySelector('.revealAudioLike');
-        revealsAudio.classList.add('active');
-    }
-    revealAudioLike()
-    
-            const likeButton = document.querySelector('#likeButton');
-        likeButton.addEventListener('change', function() {
-            const likeCount = document.querySelector('#likeCount');
-            let currentCount = likeCount.textContent.replace(/[,.]/g, '');
-            
-            if(this.checked) {
-                likeCount.textContent = formatNumber(parseInt(currentCount) + 1);
-            } else {
-                likeCount.textContent = formatNumber(parseInt(currentCount) - 1);
-            }
-            
-            fetch('./php/bioBE/bio_like', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ value: this.checked ? 1 : null, path: 'doni', userLinkId: '5957' }),
-            })
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(responseData) {
-                if (responseData.type == "error") {
-                    showErrPopup(responseData.message);
-                    likeButton.checked = !likeButton.checked;
-                    let currentCount = likeCount.textContent.replace(/[,.]/g, '');
-                    likeCount.textContent = formatNumber(parseInt(currentCount) - 1);
-                } else {
-                    console.warn('Unhandled response type:', responseData.type);
-                }
-            })
-            .catch(function(error) {
-                console.error('Error:', error);
-            });
-        });
-
-        function formatNumber(number) {
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-    </script>
-<script>
-    function hideOverlay() {
-        const overlay = document.querySelector('.overlay_audio');
-        overlay.style.opacity = '0';
-        setTimeout(() => {
-            overlay.style.display = 'none';
-        }, 300);
-        revealElements();
-                
-                                                                const playlist = [
-                                        { src: "https://r2.zyo.lol/audioLink_fa4d064c5fd0.mp3", title: "Playlist", totalDuration: "3:36", audioImage: "" },
-                                        { src: "https://r2.zyo.lol/audioLink_c843c10c31d0.mp3", title: "Khi ma", totalDuration: "3:36", audioImage: "" },
-                                        { src: "https://r2.zyo.lol/audioLink_c0b5cdcdb53a.mp3", title: "nhạc thêm cho zui", totalDuration: "0:16", audioImage: "https://r2.zyo.lol/audioImage_a870b9de1fbc.jpg" },
-                                    ];
-                let currentTrackIndex = 0;
-                function playTrack(index) {
-                    if (index >= 0 && index < playlist.length) {
-                        currentTrackIndex = index;
-                        audio.src = playlist[index].src;
-                        audio.play();
-                                                    const musicName = document.getElementById('musicName');
-                            const totalTimeDisplay = document.getElementById('totalTime');
-                            const audioAvatarContainer = document.getElementById('audio_avatar_container');
-                            if(playlist[index].audioImage){
-                                audioAvatarContainer.innerHTML = 
-                                `
-                                    <img src="${playlist[index].audioImage}" alt="Audio Image" class="audio_image">
-                                `
-                            } else {
-                                audioAvatarContainer.innerHTML = 
-                                `
-                                    <svg class="audio_image_svg" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512">
-                                        <path id="ignore" d="M406.3 48.2c-4.7.9-202 39.2-206.2 40-4.2.8-8.1 3.6-8.1 8v240.1c0 1.6-.1 7.2-2.4 11.7-3.1 5.9-8.5 10.2-16.1 12.7-3.3 1.1-7.8 2.1-13.1 3.3-24.1 5.4-64.4 14.6-64.4 51.8 0 31.1 22.4 45.1 41.7 47.5 2.1.3 4.5.7 7.1.7 6.7 0 36-3.3 51.2-13.2 11-7.2 24.1-21.4 24.1-47.8V190.5c0-3.8 2.7-7.1 6.4-7.8l152-30.7c5-1 9.6 2.8 9.6 7.8v130.9c0 4.1-.2 8.9-2.5 13.4-3.1 5.9-8.5 10.2-16.2 12.7-3.3 1.1-8.8 2.1-14.1 3.3-24.1 5.4-64.4 14.5-64.4 51.7 0 33.7 25.4 47.2 41.8 48.3 6.5.4 11.2.3 19.4-.9s23.5-5.5 36.5-13c17.9-10.3 27.5-26.8 27.5-48.2V55.9c-.1-4.4-3.8-8.9-9.8-7.7z" fill="currentColor"></path>
-                                    </svg>
-                                `
-                            }
-                            musicName.textContent = playlist[index].title;
-                            totalTimeDisplay.textContent = playlist[index].totalDuration;
-                                            }
-                }
-                playTrack(currentTrackIndex);
-                audio.addEventListener("ended", () => {
-                    if (currentTrackIndex + 1 < playlist.length) {
-                        playTrack(currentTrackIndex + 1);
-                    } else {
-                        playTrack(0);
-                    }
-                });
-                                    const backwardButton = document.getElementById("backward");
-                    const forwardButton = document.getElementById("forward");
-                    backwardButton.addEventListener("click", () => {
-                        if (playlist.length > 1) {
-                            if (currentTrackIndex - 1 >= 0) {
-                                playTrack(currentTrackIndex - 1);
-                            } else {
-                                playTrack(playlist.length - 1);
-                            }
-                        }
-                    });
-
-                    forwardButton.addEventListener("click", () => {
-                        if (playlist.length > 1) {
-                            if (currentTrackIndex + 1 < playlist.length) {
-                                playTrack(currentTrackIndex + 1);
-                            } else {
-                                playTrack(0);
-                            }
-                        }
-                    });
-                                                        const playPauseButton = document.getElementById("playPause");
-                const currentTimeDisplay = document.getElementById("currentTime");
-                const totalTimeDisplay = document.getElementById("totalTime");
-                function audioTrackSilder(sliderId) {
-                    var slider = document.getElementById(sliderId);
-
-                    noUiSlider.create(slider, {
-                        start: 0,
-                        connect: [true, false],
-                        step: 0.1,
-                        range: {
-                            'min': 0,
-                            'max': 100
-                        },
-                        format: {
-                            to: function (value) {
-                                return value;
-                            },
-                            from: function (value) {
-                                return Number(value);
-                            }
-                        }
-                    });
-
-                    let isProgrammaticUpdate = false;
-
-                    slider.noUiSlider.on('update', function (values, handle) {
-                        if (isProgrammaticUpdate) {
-                            return;
-                        }
-                        const valueInt = values[handle];
-                        const seekTime = (valueInt / 100) * (audio.duration || 0);
-                        audio.currentTime = seekTime;
-                    });
-
-                    return {
-                        instance: slider.noUiSlider,
-                        set(value) {
-                            isProgrammaticUpdate = true;
-                            slider.noUiSlider.set(value);
-                            isProgrammaticUpdate = false;
-                        }
-                    };
-                }
-                const sliderInstance = audioTrackSilder('slideTrack');
-                function formatTime(seconds) {
-                    const mins = Math.floor(seconds / 60);
-                    const secs = Math.floor(seconds % 60);
-                    return `${mins}:${secs < 10 ? "0" + secs : secs}`;
-                }
-                function updateTrack() {
-                    sliderInstance.set((audio.currentTime / audio.duration) * 100 || 0);
-                    currentTimeDisplay.textContent = formatTime(audio.currentTime);
-                }
-                playPauseButton.addEventListener("click", () => {
-                    if (audio.paused) {
-                        audio.play();
-                        playPauseButton.innerHTML = `
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M15 16h-2V8h2m-4 8H9V8h2m1-6A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg>
-                        `;
-                    } else {
-                        audio.pause();
-                        playPauseButton.innerHTML = `
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 16.5v-9l6 4.5M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg>
-                        `
-                    }
-                });
-                document.addEventListener("keydown", (e) => {
-                    if (e.code === "Space") {
-                        playPauseButton.click();
-                    }
-                });
-                document.addEventListener("keydown", (e) => {
-                    if (e.code === "ArrowLeft") {
-                        audio.currentTime -= 5;
-                    }
-                });
-                document.addEventListener("keydown", (e) => {
-                    if (e.code === "ArrowRight") {
-                        audio.currentTime += 5;
-                    }
-                });
-                totalTimeDisplay.textContent = '3:36';
-                audio.addEventListener("timeupdate", updateTrack);
-                                        createSlider('slider1', 'sliderValue1', '');
-            // get gia tri de cho viec pause va set value
-            const slider = document.getElementById('slider1').noUiSlider;
-            const inputValue = document.getElementById('sliderValue1');
-            const svgVolumn = document.getElementById("volumeIcon");
-            const mask = svgVolumn.querySelector('#changeMask');
-            const defs = svgVolumn.querySelector("defs");
-            // xu li thanh volumn slider
-            slider.on('update', function (values, handle) {
-                const volumeValue = parseFloat(values[handle]);
-
-                audio.volume = volumeValue / 100;
-
-                if (volumeValue === 0) {
-                    audio.pause();
-                    defs.innerHTML = `
-                    <mask id="volumeMute"><mask id="volumeMute1" width="13" height="13" x="30" y="18" maskUnits="userSpaceOnUse" style="mask-type: alpha;"><path d="M30 18h13v13H30z"/></mask><g fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="4"><g stroke-linecap="round" mask="url(#volumeMute1)"><path d="m40.735 20.286l-8.486 8.485m.001-8.485l8.485 8.485"/></g><path fill="#555" d="M24 6v36c-7 0-12.201-9.16-12.201-9.16H6a2 2 0 0 1-2-2V17.01a2 2 0 0 1 2-2h5.799S17 6 24 6Z"/></g></mask>
-                    `;
-                    mask.setAttribute("mask", "url(#volumeMute)");
-                } else {
-                    audio.play().catch(error => {
-                    });
-                    defs.innerHTML = `
-                    <mask id="volumeMedium"><g fill="none" stroke="#fff" stroke-width="4"><path fill="#555" stroke-linejoin="round" d="M24 6v36c-7 0-12.201-9.16-12.201-9.16H6a2 2 0 0 1-2-2V17.01a2 2 0 0 1 2-2h5.799S17 6 24 6Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M32 15a12 12 0 0 1 1.684 1.859A12.07 12.07 0 0 1 36 24c0 2.654-.846 5.107-2.278 7.09A12 12 0 0 1 32 33"/><path stroke-linecap="round" d="M34.236 41.186C40.084 37.696 44 31.305 44 24c0-7.192-3.796-13.496-9.493-17.02"/></g></mask>
-                    `;
-                    mask.setAttribute("mask", "url(#volumeMedium)");
-                }
-            });
-            // xu li audio pause va play
-            let previousSliderValue = 100;
-            svgVolumn.addEventListener("click", function () {
-                if (inputValue.value == 0) {
-                    slider.set(previousSliderValue);
-                    inputValue.value = previousSliderValue;
-
-                    defs.innerHTML = `
-                    <mask id="volumeMedium"><g fill="none" stroke="#fff" stroke-width="4"><path fill="#555" stroke-linejoin="round" d="M24 6v36c-7 0-12.201-9.16-12.201-9.16H6a2 2 0 0 1-2-2V17.01a2 2 0 0 1 2-2h5.799S17 6 24 6Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M32 15a12 12 0 0 1 1.684 1.859A12.07 12.07 0 0 1 36 24c0 2.654-.846 5.107-2.278 7.09A12 12 0 0 1 32 33"/><path stroke-linecap="round" d="M34.236 41.186C40.084 37.696 44 31.305 44 24c0-7.192-3.796-13.496-9.493-17.02"/></g></mask>
-                    `;
-                    mask.setAttribute("mask", "url(#volumeMedium)");
-                } else {
-                    previousSliderValue = parseFloat(inputValue.value);
-
-                    inputValue.value = '0';
-                    slider.set(0);
-
-                    defs.innerHTML = `
-                    <mask id="volumeMute"><mask id="volumeMute1" width="13" height="13" x="30" y="18" maskUnits="userSpaceOnUse" style="mask-type: alpha;"><path d="M30 18h13v13H30z"/></mask><g fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="4"><g stroke-linecap="round" mask="url(#volumeMute1)"><path d="m40.735 20.286l-8.486 8.485m.001-8.485l8.485 8.485"/></g><path fill="#555" d="M24 6v36c-7 0-12.201-9.16-12.201-9.16H6a2 2 0 0 1-2-2V17.01a2 2 0 0 1 2-2h5.799S17 6 24 6Z"/></g></mask>
-                    `;
-                    mask.setAttribute("mask", "url(#volumeMute)");
-                }
-            });
-            }
-    audio.volume = 1;
-</script><script>
-    function snowflakeCursor(color, options) {
-        let hasWrapperEl = options && options.element;
-        let element = hasWrapperEl || document.body;
-
-        let width = window.innerWidth;
-        let height = window.innerHeight;
-        let cursor = { x: width / 2, y: height / 2 };
-        let particles = [];
-        let canvas, context, animationFrame;
-
-        let canvImages = [];
-
-        const prefersReducedMotion = window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        );
-
-        prefersReducedMotion.onchange = () => {
-            if (prefersReducedMotion.matches) {
-                destroy();
-            } else {
-                init();
-            }
-        };
-
-        function init() {
-            if (prefersReducedMotion.matches) {
-                console.log(
-                    "This browser has prefers reduced motion turned on, so the cursor did not init"
-                );
-                return false;
-            }
-
-            canvas = document.createElement("canvas");
-            context = canvas.getContext("2d");
-
-            canvas.style.top = "0px";
-            canvas.style.left = "0px";
-            canvas.style.pointerEvents = "none";
-
-            if (hasWrapperEl) {
-                canvas.style.position = "absolute";
-                element.appendChild(canvas);
-                canvas.width = element.clientWidth;
-                canvas.height = element.clientHeight;
-            } else {
-                canvas.style.position = "fixed";
-                document.body.appendChild(canvas);
-                canvas.width = width;
-                canvas.height = height;
-            }
-
-            const svgIcons = [
-                `
-                <svg class="effect_snow_fake" width="1em" height="1em" fill="${color}" viewBox="0 0 50 50" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" overflow="inherit"><path d="M23 47.689v-6.342l-3.357 1.992L18 42.305v-2.229l5-2.986v-4.168l-4 2.451v-4.416l-4 2.094v5.99l-1.653 1.23L12 39.16v-4.012L6.426 38.27 4 37.271v-2.529l5.685-3.17L6 29.75v-2.32l2.123-1.127 5.214 3.068 3.612-2.084-.082-.065-3.665-2.123 3.568-2.228-3.577-2.083L7.98 23.84 6 22.871v-2.307l3.542-1.978L4 15.533v-2.529l2.321-1.114L12 15.087v-4.076l1.485-1.127 1.943 1.18-.056 6.105 3.673 2.122.033-4.311L23 17.079v-4.167l-5-2.988V7.71l1.643-1.05L23 8.652V2.324L24.994 1 27 2.324v6.328l3.906-2.031L33 7.84v1.992l-6 3.08v4.167l4-2.267v4.534l4-2.084v-6.524l1.455-.866 1.545.865v4.167l5.842-3.08L46 13.042v2.359l-5.495 3.17L44 20.525v2.254l-1.83.996-5.327-3.158-3.679 2.346 3.549 2.228-3.659 2.122 3.772 1.992 5.389-2.986L44 27.535v2.15l-3.32 1.887 5.32 3.17v2.49l-2.522 1.037L38 35.281v3.955l-1.52 1.049L35 39.236v-6.002l-4-2.213v4.168l-4-2.268v4.168l5 2.986v2.359l-1.647.904L27 41.348v6.342L24.994 49zm-1.466-22.597L23.42 28h3.514l1.613-2.908L26.843 22h-3.514z"/></svg>
-                `,
-            ];
-
-            svgIcons.forEach((svgString) => {
-                let img = createImageFromSVG(svgString);
-                canvImages.push(img);
-            });
-
-            bindEvents();
-            loop();
-        }
-
-        function createImageFromSVG(svgString) {
-            const blob = new Blob([svgString], { type: "image/svg+xml" });
-            const url = URL.createObjectURL(blob);
-
-            const img = new Image();
-            img.onload = () => URL.revokeObjectURL(url);
-            img.src = url;
-
-            return img;
-        }
-
-        function bindEvents() {
-            element.addEventListener("mousemove", onMouseMove);
-            element.addEventListener("touchmove", onTouchMove, { passive: true });
-            element.addEventListener("touchstart", onTouchMove, { passive: true });
-            window.addEventListener("resize", onWindowResize);
-        }
-
-        function onWindowResize() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-
-            if (hasWrapperEl) {
-                canvas.width = element.clientWidth;
-                canvas.height = element.clientHeight;
-            } else {
-                canvas.width = width;
-                canvas.height = height;
-            }
-        }
-
-        function onTouchMove(e) {
-            if (e.touches.length > 0) {
-                for (let i = 0; i < e.touches.length; i++) {
-                    addParticle(
-                        e.touches[i].clientX,
-                        e.touches[i].clientY,
-                        canvImages[Math.floor(Math.random() * canvImages.length)]
-                    );
-                }
-            }
-        }
-
-        function onMouseMove(e) {
-            if (hasWrapperEl) {
-                const boundingRect = element.getBoundingClientRect();
-                cursor.x = e.clientX - boundingRect.left;
-                cursor.y = e.clientY - boundingRect.top;
-            } else {
-                cursor.x = e.clientX;
-                cursor.y = e.clientY;
-            }
-            if (Math.random() < 0.675) {
-                addParticle(
-                    cursor.x,
-                    cursor.y,
-                    canvImages[Math.floor(Math.random() * canvImages.length)]
-                );
-            }
-        }
-
-        function addParticle(x, y, img) {
-            particles.push(new Particle(x, y, img));
-        }   
-
-        function updateParticles() {
-            if (particles.length === 0) {
-                return;
-            }
-
-            context.clearRect(0, 0, width, height);
-
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update(context);
-            }
-
-            for (let i = particles.length - 1; i >= 0; i--) {
-                if (particles[i].lifeSpan < 0) {
-                    particles.splice(i, 1);
-                }
-            }
-
-            if (particles.length === 0) {
-                context.clearRect(0, 0, width, height);
-            }
-        }
-
-        function loop() {
-            updateParticles();
-            animationFrame = requestAnimationFrame(loop);
-        }
-
-        function destroy() {
-            canvas.remove();
-            cancelAnimationFrame(animationFrame);
-            element.removeEventListener("mousemove", onMouseMove);
-            element.removeEventListener("touchmove", onTouchMove);
-            element.removeEventListener("touchstart", onTouchMove);
-            window.removeEventListener("resize", onWindowResize);
-        }
-
-        function Particle(x, y, canvasItem) {
-            const lifeSpan = Math.floor(Math.random() * 60 + 80);
-            this.initialLifeSpan = lifeSpan;
-            this.lifeSpan = lifeSpan;
-            this.velocity = {
-                x: (Math.random() < 0.5 ? -1 : 1) * (Math.random() / 2),
-                y: 1 + Math.random(),
-            };
-            this.position = { x: x, y: y };
-            this.canv = canvasItem;
-
-            this.update = function (context) {
-                this.position.x += this.velocity.x;
-                this.position.y += this.velocity.y;
-                this.lifeSpan--;
-
-                this.velocity.x += ((Math.random() < 0.5 ? -1 : 1) * 2) / 75;
-                this.velocity.y -= Math.random() / 300;
-
-                const scale = Math.max(this.lifeSpan / this.initialLifeSpan, 0);
-
-                const degrees = 2 * this.lifeSpan;
-                const radians = degrees * 0.0174533;
-
-                context.translate(this.position.x, this.position.y);
-                context.rotate(radians);
-
-                context.drawImage(
-                    this.canv,
-                    (-this.canv.width / 2) * scale,
-                    -this.canv.height / 2,
-                    this.canv.width * scale,
-                    this.canv.height * scale
-                );
-
-                context.rotate(-radians);
-                context.translate(-this.position.x, -this.position.y);
-            };
-        }
-
-        init();
-
-        return {
-            destroy: destroy,
-        };
-    }
-
-    function sparkingEffect(color = '#ffffff'){
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d", {
-            alpha: true
-        });
-        document.body.appendChild(canvas);
-        Object.assign(canvas.style, {
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            pointerEvents: "none",
-            zIndex: 500
-        });
-        
-        const dpr = window.devicePixelRatio || 1;
-        let width = innerWidth,
-            height = innerHeight;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        ctx.scale(dpr, dpr);
-        
-        window.addEventListener("resize", () => {
-            width = innerWidth;
-            height = innerHeight;
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-            ctx.scale(dpr, dpr);
-        });
-        const stars = [];
-        const maxStars = 500;
-        
-        class Star {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.size = 1 + Math.random() * 1.2;
-                this.life = 500 + Math.random() * 400;
-                this.birth = performance.now();
-                this.vx = (Math.random() - 0.5) * 0.6;
-                this.vy = (Math.random() - 0.5) * 0.4;
-            }
-            draw(now) {
-                const age = now - this.birth;
-                const alpha = 1 - age / this.life;
-                if (alpha <= 0) return false;
-                this.x += this.vx;
-                this.y += this.vy;
-                ctx.globalAlpha = alpha;
-                ctx.fillStyle = color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-                return true;
-            }
-        }
-        
-        function loop(now) {
-            ctx.clearRect(0, 0, width, height);
-            for (let i = stars.length - 1; i >= 0; i--) {
-                if (!stars[i].draw(now)) stars.splice(i, 1);
-            }
-            requestAnimationFrame(loop);
-        }
-        requestAnimationFrame(loop);
-        document.addEventListener("mousemove", (e) => {
-            for (let i = 0; i < 1; i++) {
-                if (stars.length > maxStars) stars.shift();
-                stars.push(new Star(e.clientX, e.clientY));
-            }
-        });
-    }
-    
-
-    function trailingCursor(options) {
-        let hasWrapperEl = options && options.element;
-        let element = hasWrapperEl || document.body;
-
-        let width = window.innerWidth;
-        let height = window.innerHeight;
-        let cursor = { x: width / 2, y: width / 2 };
-        let particles = [];
-        let canvas, context, animationFrame;
-
-        const totalParticles = options?.particles || 20;
-        const rate = options?.rate || 0.5;
-        const baseImageSrc = options?.baseImageSrc || "https://r2.zyo.lol/cursor_783443d1e4f1.jpg";
-        let cursorsInitted = false;
-
-        let baseImage = new Image();
-        baseImage.src = baseImageSrc;
-
-        const prefersReducedMotion = window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        );
-
-        prefersReducedMotion.onchange = () => {
-            if (prefersReducedMotion.matches) {
-                destroy();
-            } else {
-                init();
-            }
-        };
-
-        function init() {
-            if (prefersReducedMotion.matches) {
-                console.log(
-                    "This browser has prefers reduced motion turned on, so the cursor did not init"
-                );
-                return false;
-            }
-
-            canvas = document.createElement("canvas");
-            context = canvas.getContext("2d");
-            canvas.style.top = "0px";
-            canvas.style.left = "0px";
-            canvas.style.pointerEvents = "none";
-
-            if (hasWrapperEl) {
-                canvas.style.position = "absolute";
-                element.appendChild(canvas);
-                canvas.width = element.clientWidth;
-                canvas.height = element.clientHeight;
-            } else {
-                canvas.style.position = "fixed";
-                document.body.appendChild(canvas);
-                canvas.width = width;
-                canvas.height = height;
-            }
-
-            bindEvents();
-            loop();
-        }
-
-        function bindEvents() {
-            element.addEventListener("mousemove", onMouseMove);
-            window.addEventListener("resize", onWindowResize);
-        }
-
-        function onWindowResize(e) {
-            width = window.innerWidth;
-            height = window.innerHeight;
-
-            if (hasWrapperEl) {
-                canvas.width = element.clientWidth;
-                canvas.height = element.clientHeight;
-            } else {
-                canvas.width = width;
-                canvas.height = height;
-            }
-        }
-
-        function onMouseMove(e) {
-            if (hasWrapperEl) {
-                const boundingRect = element.getBoundingClientRect();
-                cursor.x = e.clientX - boundingRect.left;
-                cursor.y = e.clientY - boundingRect.top;
-            } else {
-                cursor.x = e.clientX;
-                cursor.y = e.clientY;
-            }
-
-            if (cursorsInitted === false) {
-                cursorsInitted = true;
-                for (let i = 0; i < totalParticles; i++) {
-                    addParticle(cursor.x, cursor.y, baseImage);
-                }
-            }
-        }
-
-        function addParticle(x, y, image) {
-            particles.push(new Particle(x, y, image));
-        }
-
-        function updateParticles() {
-            context.clearRect(0, 0, width, height);
-
-            let x = cursor.x;
-            let y = cursor.y;
-
-            particles.forEach(function (particle, index, particles) {
-                let nextParticle = particles[index + 1] || particles[0];
-
-                particle.position.x = x;
-                particle.position.y = y;
-                particle.move(context);
-                x += (nextParticle.position.x - particle.position.x) * rate;
-                y += (nextParticle.position.y - particle.position.y) * rate;
-            });
-        }
-
-        function loop() {
-            updateParticles();
-            animationFrame = requestAnimationFrame(loop);
-        }
-
-        function destroy() {
-            canvas.remove();
-            cancelAnimationFrame(animationFrame);
-            element.removeEventListener("mousemove", onMouseMove);
-            window.addEventListener("resize", onWindowResize);
-        };
-        function Particle(x, y, image) {
-            this.position = { x: x, y: y };
-            this.image = image;
-
-            this.move = function (context) {
-                context.drawImage(
-                    this.image,
-                    this.position.x,
-                    this.position.y 
-                );
-            };
-        }
-
-        init();
-
-        return {
-            destroy: destroy
-        }
-    }
-    function ghostCursor(options) {
-        let hasWrapperEl = options && options.element;
-        let element = hasWrapperEl || document.body;
-
-        let randomDelay = options && options.randomDelay;
-        let minDelay = options && options.minDelay || 5;
-        let maxDelay = options && options.maxDelay || 50;
-        const lifeSpan = options && options.lifeSpan || 40;
-
-        let width = window.innerWidth;
-        let height = window.innerHeight;
-        let cursor = { x: width / 2, y: width / 2 };
-        let particles = [];
-        let canvas, context, animationFrame;
-
-        let baseImage = new Image();
-        if (options && options.image) {
-            baseImage.src = options.image;
-        } else {
-            baseImage.src =
-                "https://r2.zyo.lol/cursor_783443d1e4f1.jpg";
-        }
-
-        const prefersReducedMotion = window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        );
-
-        prefersReducedMotion.onchange = () => {
-            if (prefersReducedMotion.matches) {
-                destroy();
-            } else {
-                init();
-            }
-        };
-
-        function init() {
-            if (prefersReducedMotion.matches) {
-                console.log(
-                    "This browser has prefers reduced motion turned on, so the cursor did not init"
-                );
-                return false;
-            }
-
-            canvas = document.createElement("canvas");
-            context = canvas.getContext("2d");
-            canvas.style.top = "0px";
-            canvas.style.left = "0px";
-            canvas.style.pointerEvents = "none";
-
-            if (hasWrapperEl) {
-                canvas.style.position = "absolute";
-                element.appendChild(canvas);
-                canvas.width = element.clientWidth;
-                canvas.height = element.clientHeight;
-            } else {
-                canvas.style.position = "fixed";
-                document.body.appendChild(canvas);
-                canvas.width = width;
-                canvas.height = height;
-            }
-
-            bindEvents();
-            loop();
-        }
-
-        function bindEvents() {
-            element.addEventListener("mousemove", onMouseMove);
-            element.addEventListener("touchmove", onTouchMove, { passive: true });
-            element.addEventListener("touchstart", onTouchMove, { passive: true });
-            window.addEventListener("resize", onWindowResize);
-        }
-
-        function onWindowResize(e) {
-            width = window.innerWidth;
-            height = window.innerHeight;
-
-            if (hasWrapperEl) {
-                canvas.width = element.clientWidth;
-                canvas.height = element.clientHeight;
-            } else {
-                canvas.width = width;
-                canvas.height = height;
-            }
-        }
-
-        function onTouchMove(e) {
-            if (e.touches.length > 0) {
-                for (let i = 0; i < e.touches.length; i++) {
-                    addParticle(e.touches[i].clientX, e.touches[i].clientY, baseImage);
-                }
-            }
-        }
-
-        let getDelay = () => Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
-        let lastTimeParticleAdded = Date.now(),
-            interval = getDelay();
-
-        function onMouseMove(e) {
-            if (randomDelay) {
-                if (lastTimeParticleAdded + interval > Date.now()) return;
-                lastTimeParticleAdded = Date.now();
-                interval = getDelay();
-            }
-
-            if (hasWrapperEl) {
-                const boundingRect = element.getBoundingClientRect();
-                cursor.x = e.clientX - boundingRect.left;
-                cursor.y = e.clientY - boundingRect.top;
-            } else {
-                cursor.x = e.clientX;
-                cursor.y = e.clientY;
-            }
-
-            addParticle(cursor.x, cursor.y, baseImage);
-        }
-
-        function addParticle(x, y, image) {
-            particles.push(new Particle(x, y, image));
-        }
-
-        function updateParticles() {
-            if (particles.length == 0) {
-                return;
-            }
-
-            context.clearRect(0, 0, width, height);
-
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update(context);
-            }
-
-            for (let i = particles.length - 1; i >= 0; i--) {
-                if (particles[i].lifeSpan < 0) {
-                    particles.splice(i, 1);
-                }
-            }
-
-            if (particles.length == 0) {
-                context.clearRect(0, 0, width, height);
-            }
-        }
-
-        function loop() {
-            updateParticles();
-            animationFrame = requestAnimationFrame(loop);
-        }
-
-        function destroy() {
-            canvas.remove();
-            cancelAnimationFrame(animationFrame);
-            element.removeEventListener("mousemove", onMouseMove);
-            element.removeEventListener("touchmove", onTouchMove);
-            element.removeEventListener("touchstart", onTouchMove);
-            window.addEventListener("resize", onWindowResize);
-        };
-
-        /**
-         * Particles
-         */
-                    function Particle(x, y, image) {
-                this.initialLifeSpan = lifeSpan; // ms
-                this.lifeSpan = lifeSpan; // ms
-                this.position = { x: x, y: y };
-
-                this.image = image;
-
-                this.update = function (context) {
-                    this.lifeSpan--;
-                    const opacity = Math.max(this.lifeSpan / this.initialLifeSpan, 0);
-
-                    // Tính toán để căn giữa hình ảnh
-                    const imageWidth = this.image.width || 16; // Chiều rộng mặc định nếu không xác định
-                    const imageHeight = this.image.height || 16; // Chiều cao mặc định nếu không xác định
-
-                    context.globalAlpha = opacity;
-                    context.drawImage(
-                        this.image,
-                        this.position.x - imageWidth / 2, // Căn giữa theo chiều ngang
-                        this.position.y - imageHeight / 2 // Căn giữa theo chiều dọc
-                    );
-                };
-            }
-        
-        init();
-
-        return {
-            destroy: destroy
-        }
-    }
-</script><style>
-    .text_effect_5 {
-        color: #f8f8f8;
-        background: linear-gradient(90deg, transparent, var(---nameColor), transparent);
-        background-repeat: no-repeat;
-        background-size: 80%;
-        animation: shine_effect 2s linear infinite;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: var(--nameColor25);
-        background-clip: text;
-    }
-    /* shine */
-    .text_effect_3 {
-        overflow: hidden;
-        background: linear-gradient(90deg, #000, var(--nameColor), var(--nameColor), #000);
-        background-repeat: no-repeat;
-        background-size: 80%;
-        animation: shine_effect 2s linear infinite;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: rgba(0, 0, 0, 0);
-    }
-</style>
-<script>
-    </script>
-<script>
-    const titleText = "@Doni";
-        let index = 0;
-        let isDeleting = false;
-
-        function typeWriter() {
-            if (isDeleting) {
-                document.title = titleText.substring(0, index);
-                index--;
-            } else {
-                document.title = titleText.substring(0, index + 1);
-                index++;
-            }
-
-            if (!isDeleting && index === titleText.length) {
-                isDeleting = true;
-                setTimeout(typeWriter, 0);
-                return;
-            } else if (isDeleting && index === 0) {
-                isDeleting = false;
-                setTimeout(typeWriter, 0);
-                return;
-            }
-
-            const speed = isDeleting ? 350 : 350;
-            setTimeout(typeWriter, speed);
-        }
-
-        window.onload = typeWriter;
-</script>
-<script>
-    function openPopupPreview(link){
-        const linkPreview = document.getElementById('link_preview');
-        const linkPreviewButton = document.getElementById('link_preview_button');
-        linkPreview.value = link
-        linkPreviewButton.href = link
-        linkPreviewButton.target = '_blank'
-        linkPreviewButton.rel = 'noopener noreferrer'
-        openPopup('link_preview_container');
-    }
-</script>
-<script src="./template/js/text-effect.js?v=1.0.4" type="text/javascript"></script>
-<script>
-    var userName = document.getElementById('userName');
-            typeWriterEffect('userName', "Doni");
-        </script>
-<!--  -->
+</html>
